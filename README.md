@@ -24,6 +24,7 @@
 #### Web端接入
 - 数据展现
 - 指令下发
+- Node-Red
 
 #### OTA
 - Job / Job Agent
@@ -40,6 +41,10 @@
 
 #### Web端接入授权
 - Cognito Identity Pool 与第三方授权结合(Amazon Login/WeChat)
+
+#### 边缘计算
+- Greengrass
+
 
 ### CVRA
 介绍AWS车联网参考架构CVRA
