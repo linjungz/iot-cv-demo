@@ -211,6 +211,193 @@ SELECT *, timestamp() as timestamp FROM 'truck/#'
 
 ## 3. 发送数据至Elasticsearch
 
+- Step 4 - Sending data from your Device to Elasticsearch
+
+Next we are going to be creating our simulated Van on our IOT device.
+
+- Connect to your device
+- Navigate to the directory your IOT certificates are located in
+- Create a new file by running the following command via the command line
+
+```sh
+touch simulatedVan.py
+```
+
+- Open this file with your favorite editor
+- We will start by setting up the required libraries and certificates within our code
+
+```python
+#!/usr/bin/python
+#Lab 10 - Streaming data to Elasticsearch via AWS IoT
+
+import sys
+import ssl
+from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
+import json
+import random
+import time
+
+#Setup our MQTT client and security certificates
+#Make sure your certificate names match what you downloaded from AWS IoT
+
+mqttc = AWSIoTMQTTClient("1234")
+
+#Make sure you use the correct region!
+mqttc.configureEndpoint("data.iot.us-west-2.amazonaws.com",8883)
+mqttc.configureCredentials("./rootCA.pem","./privateKey.pem","./certificate.pem")
+```
+
+- We will then define our json encoding function and assign it to our AWS IOT variable
+
+```python
+def json_encode(string):
+        return json.dumps(string)
+
+mqttc.json_encode=json_encode
+```
+
+- We will then write our code to connect to the message hub and notify us that we connected
+
+```python
+#Connecting to the message broker
+mqttc.connect()
+print "Connected"
+```
+
+- We are then going to write the loop that is going to generate our data. It should be noted that this data is being generated randomly and your results will be unique to you.
+
+```python
+#For loop to generate our data
+while True:
+    try:
+        x
+    except NameError:
+        x = 1412638168724
+        lon = 39.09972
+        lat = -94.57853
+        pre =111
+        engTemp = 211
+        carTemp = 41
+        rpm = 2216
+        speed = 18
+        bat = 12.3
+    else :
+        lon = lon + (random.randrange(-1,2,1) * float(format(random.random()* .001,'.5f')))
+        lat = lat + (random.randrange(-1,2,1) * float(format(random.random()* .001,'.5f')))
+        pre = pre + int(random.randrange(-1,2,1) *random.random()* 5)
+        engTemp = engTemp + int(random.randrange(-1,2,1) *random.random()* 5)
+        carTemp = carTemp + int(random.randrange(-1,2,1) *random.random()* 5)
+        rpm = rpm + int(random.randrange(-1,2,1) *random.random()* 10)
+        speed = speed + int(random.randrange(-1,2,1) *random.random()*2)
+        bat = bat + float(random.randrange(-1,2,1) * float(format(random.random()* .1,'.1f')))
+        message ={
+          'nms':  "%s" % (x),
+          'location': "%s, %s" % (lon,lat),
+          'geoJSON': {
+            'type': "Point",
+            'coordinates':[
+                "%s" % (lon),
+                "%s" % (lat)
+            ]},
+          'pressure': pre,
+          'engine_temperature' : engTemp,
+          'cargo_temperature': carTemp,
+          'rpm':rpm,
+          'speed' : speed,
+          'battery': bat
+        }
+        message = mqttc.json_encode(message)
+        mqttc.publish("truck/truck1", message, 0)
+        print "Message published. Data:" + message
+        time.sleep(2)
+```
+
+- Full Source Code
+
+```python
+#!/usr/bin/python
+#Lab 10 - Streaming data to Elasticsearch via AWS IoT
+
+import sys
+import ssl
+from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
+import json
+import random
+import time
+
+#Setup our MQTT client and security certificates
+#Make sure your certificate names match what you downloaded from AWS IoT
+
+mqttc = AWSIoTMQTTClient("1234")
+
+#Make sure you use the correct region!
+mqttc.configureEndpoint("data.iot.us-west-2.amazonaws.com",8883)
+mqttc.configureCredentials("./rootCA.pem","./privateKey.pem","./certificate.pem")
+
+def json_encode(string):
+        return json.dumps(string)
+
+mqttc.json_encode=json_encode
+
+#Connecting to the message broker
+mqttc.connect()
+print "Connected"
+
+#For loop to generate our data
+while True:
+    try:
+        x
+    except NameError:
+        x = 1412638168724
+        lon = 39.09972
+        lat = -94.57853
+        pre =111
+        engTemp = 211
+        carTemp = 41
+        rpm = 2216
+        speed = 18
+        bat = 12.3
+    else :
+        lon = lon + (random.randrange(-1,2,1) * float(format(random.random()* .001,'.5f')))
+        lat = lat + (random.randrange(-1,2,1) * float(format(random.random()* .001,'.5f')))
+        pre = pre + int(random.randrange(-1,2,1) *random.random()* 5)
+        engTemp = engTemp + int(random.randrange(-1,2,1) *random.random()* 5)
+        carTemp = carTemp + int(random.randrange(-1,2,1) *random.random()* 5)
+        rpm = rpm + int(random.randrange(-1,2,1) *random.random()* 10)
+        speed = speed + int(random.randrange(-1,2,1) *random.random()*2)
+        bat = bat + float(random.randrange(-1,2,1) * float(format(random.random()* .1,'.1f')))
+        message ={
+          'nms':  "%s" % (x),
+          'location': "%s, %s" % (lon,lat),
+          'geoJSON': {
+            'type': "Point",
+            'coordinates':[
+                "%s" % (lon),
+                "%s" % (lat)
+            ]},
+          'pressure': pre,
+          'engine_temperature' : engTemp,
+          'cargo_temperature': carTemp,
+          'rpm':rpm,
+          'speed' : speed,
+          'battery': bat
+        }
+        message = mqttc.json_encode(message)
+        mqttc.publish("truck/truck1", message, 0)
+        print "Message published. Data:" + message
+        time.sleep(2)
+```
+
+- After you have written this file save it to the device. Within the terminal run the following command to generate the simulated connected vehicles data
+
+```sh
+python simulatedVan.py
+```
+
+- You should be seeing data messages being sent to topic “truck/truck1” in your terminal window or you can also check to see if the data is being sent to the message broker by going to the IOT dashboard and clicking on MQTTC client and subscribing to “truck/truck1” or “truck/#”
+
+    Note: the # in the topic name is a special character that allows us to aggregate all the data. This character acts as a wildcard and must be the last character in the topic you subscribe to. For further reading click here.
+
 ## 4. 设置Kibana进行数据可视化
 
 ### 4.1 Kibana index pattern创建
