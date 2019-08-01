@@ -209,9 +209,11 @@ SELECT *, timestamp() as timestamp FROM 'truck/#'
 ![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/32.png)
 </a>
 
-## 3. 设置Kibana进行数据可视化
+## 3. 发送数据至Elasticsearch
 
-- Kibana Dashboard创建
+## 4. 设置Kibana进行数据可视化
+
+### 4.1 Kibana index pattern创建
 
 - 进入Kibana节点，节点可从您的Elasticsearch控制面板找到。节点长相如下
 
@@ -233,6 +235,8 @@ https://search-iot-lab-xxxxxxxxxxxxx.us-east-1.es.amazonaws.com/_plugin/kibana/
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/42.png">
 ![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/42.png)
 </a>
+
+### 4.2 数据可视化
 
 - 接下来进入Visualize侧边栏，选择create a visualization。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/43.png">
