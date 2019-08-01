@@ -209,7 +209,62 @@ SELECT *, timestamp() as timestamp FROM 'truck/#'
 ![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/32.png)
 </a>
 
-### 3. 设置Kibana进行数据可视化
+## 3. 设置Kibana进行数据可视化
 
 - Kibana Dashboard创建
 
+- 进入Kibana节点，节点可从您的Elasticsearch控制面板找到。节点长相如下
+
+```sh
+https://search-iot-lab-xxxxxxxxxxxxx.us-east-1.es.amazonaws.com/_plugin/kibana/
+```
+
+- 进入Kibana的discovery侧边栏，选择Create index pattern，并在index pattern中输入“trucks”。匹配成功后会显示Success，之后请点击Next step
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/40.png">
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/40.png)
+</a>
+
+- 从下拉菜单中选择Time Filter field name为datetime。点击create index pattern。
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/41.png">
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/41.png)
+</a>
+
+- 您将看见刚刚创建的index pattern: trucks*。
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/42.png">
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/42.png)
+</a>
+
+- 接下来进入Visualize侧边栏，选择create a visualization。
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/43.png">
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/43.png)
+</a>
+
+- 选择Line作为我们要创建的图的类型。
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/44.png">
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/44.png)
+</a>
+
+- 选择trucks*。
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/45.png">
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/45.png)
+</a>
+
+- 打开Metrics Y-Axis的下拉菜单，在Aggregation中选择average，Field选择engine_tempterature。
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/46.png">
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/46.png)
+</a>
+
+- 打开Buckets X-Axis的下拉菜单，在Aggregation中选择Date Histogram，Field选择datetime。
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/47.png">
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/47.png)
+</a>
+
+- 点击蓝色的开始按钮就将生成图像。
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/48.png">
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/48.png)
+</a>
+
+- 右上角的蓝色Refresh按钮可以刷新图像来预览最新数据。
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/49.png">
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/49.png)
+</a>
