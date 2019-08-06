@@ -16,7 +16,7 @@ toc: true
 <a data-fancybox="gallery" href="./img/dashboard/1.png">
 </a>
 
-![Get started](./img/dashboard/1.png)
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/1.png)
 
 - 在Elasticsearch Service首页选择“创建新域”。
 <a data-fancybox="gallery" href="./img/dashboard/2.png">
