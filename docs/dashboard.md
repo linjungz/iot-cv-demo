@@ -121,6 +121,7 @@ curl -H 'Content-Type: application/json' -i -X PUT -d '{
     }
   }
 }
+' 'https://search-iot-lab-xxxxxxxxxxxxxxxxxxxxx.cn-north-1.es.amazonaws.com.cn/cars'
 ```
 
 如果成功您将收到状态“ {“acknowledged”:true)”。如果不成功，请检查Kibana能否进入。如果不能进入，请调整访问策略。
