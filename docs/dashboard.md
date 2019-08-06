@@ -20,8 +20,8 @@ toc: true
 
 - 在Elasticsearch Service首页选择“创建新域”。
 <a data-fancybox="gallery" href="./img/dashboard/2.png">
-![Get started](./img/dashboard/2.png)
 </a>
+![Get started](./img/dashboard/2.png)
 
 - 选择部署类型为“开发和测试”，Elasticsearch 选择版本为“6.7”，点击下一步。
 <a data-fancybox="gallery" href="./img/dashboard/3.png">
