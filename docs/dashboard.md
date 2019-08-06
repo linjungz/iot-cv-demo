@@ -312,10 +312,10 @@ mqttc.configureCredentials(
 
 ![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/5.png)
 
-- 在终端运行您的car_publish.py文件,传递的数据将会显示在您的终端上
+- 在终端使用python3运行您的car_publish.py文件,传递的数据将会显示在您的终端上
 
 ```sh
-python car_publish.py
+python3 car_publish.py
 ```
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/6.png">
 </a>
