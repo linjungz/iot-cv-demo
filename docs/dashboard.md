@@ -27,12 +27,12 @@ toc: true
 ![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/3.png)
 </a>
 
-- 配置Elasticsearch域名为“iot-lab”， 实例类型选择“r5.large.elasticsearch“，实例数量选择为1。
+- 配置Elasticsearch域名为“iot-lab”， 实例类型选择“r5.large.elasticsearch“，实例数量选择为1。如果有更小的实例也可以选择。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/4.png">
 ![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/4.png)
 </a>
 
-- 其余配置如果与图片中相同，则无需更改，检查完毕后直接点击下一步。
+- 其余配置如果与图片中相同，则无需更改（关闭专用主实例和加密），检查完毕后直接点击下一步。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/5.png">
 ![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/5.png)
 </a>
@@ -40,7 +40,7 @@ toc: true
 ![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/6.png)
 </a>
 
-- 网络配置选择“公有访问权限”， 访问策略选择允许从特定IP访问域，一个窗口会弹出，您需要在窗口输入您的公有IP或者对应的CIDR形式，公网IP可通过这个网站获取: [What Is My IP](https://www.whatismyip.com/)
+- 网络配置选择“公有访问权限”， 访问策略选择允许从特定IP访问域，一个窗口会弹出，您需要在窗口输入您的登陆电脑的公有IP或者对应的CIDR形式，公网IP可通过这个网站获取: [What Is My IP](https://www.whatismyip.com/)
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/6a.png">
 ![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/6a.png)
 </a>
@@ -77,7 +77,7 @@ toc: true
 ![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/8.png)
 </a>
 
-- 在此处您将看到Kibana链接，点击Kibana链接以访问Kibana网页，如果无法进入网页，请再次检查您的IP地址是否正确，如果有问题请修改访问策略。
+- 点击“iot-lab“，您将进入域的详细页面。在此处您将看到Kibana链接，点击Kibana链接以访问Kibana网页，如果无法进入网页，请再次检查您的IP地址是否正确，如果有问题请修改访问策略。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/9.png">
 ![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/9.png)
 </a>
@@ -87,15 +87,12 @@ toc: true
 
 ### 1.2 在Elasticsearch集群上建立索引
 
-- 索引建立
-- 访问权限介绍
-
-- 在这里我们使用HTTP请求来建立索引，请在终端输入如下命令，请把最下面一行的链接替换为您的集群的终端节点，在控制面板可以找到
+- 在这里我们使用HTTP请求来建立索引，请在终端输入如下命令，请把最下面一行的链接替换为您的集群的终端节点，在“iot-lab”的详细页面可以找到。
 
 ```sh
 curl -H 'Content-Type: application/json' -i -X PUT -d '{
   "mappings": {
-    "truck": {
+    "car": {
       "properties": {
         "timestamp": {
           "type": "long",
@@ -111,7 +108,7 @@ curl -H 'Content-Type: application/json' -i -X PUT -d '{
         "battery":{
         "type": "float"
         },
-        "engine_temperature":{
+        "temperature":{
         "type": "short"
         },
         "pressure":{
@@ -119,22 +116,16 @@ curl -H 'Content-Type: application/json' -i -X PUT -d '{
         },
         "rpm":{
         "type": "short"
-        },
-        "cargo_temperature":{
-        "type": "short"
         }
       }
     }
   }
 }
-' 'https://search-iot-lab-xxxxxxxxxxxxxxxxxxxxx.cn-north-1.es.amazonaws.com.cn/trucks'
 ```
 
-如果成功您将收到状态“ {“acknowledged”:true)”。如果无法访问，请检查Kibana能否进入。如果不能进入，请调整访问策略。
+如果成功您将收到状态“ {“acknowledged”:true)”。如果不成功，请检查Kibana能否进入。如果不能进入，请调整访问策略。
 
 ## 2. 设置规则将数据存入ES
-
-- IoT Core Rule Engine设置
 
 ### 2.1 创建IAM角色
 
@@ -178,7 +169,7 @@ curl -H 'Content-Type: application/json' -i -X PUT -d '{
 - 在规则查询语句中输入
 
 ```SQL
-SELECT *, timestamp() as timestamp FROM 'truck/#'
+SELECT *, timestamp() as timestamp FROM 'connectedcar/#'
 ```
 
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/27.png">
@@ -190,7 +181,7 @@ SELECT *, timestamp() as timestamp FROM 'truck/#'
 ![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/28.png)
 </a>
 
-- 选择资源为"iot-lab", ID输入“${newuuid()}”，索引输入“trucks“， 类型输入“truck”。
+- 选择资源为"iot-lab", ID输入“${newuuid()}”，索引输入“cars“， 类型输入“car”。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/29.png">
 ![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/29.png)
 </a>
@@ -211,192 +202,88 @@ SELECT *, timestamp() as timestamp FROM 'truck/#'
 
 ## 3. 发送数据至Elasticsearch
 
-- Step 4 - Sending data from your Device to Elasticsearch
+### 3.1 使用Cloud Formation生成IoT设备
 
-Next we are going to be creating our simulated Van on our IOT device.
+- 请点击此GitHub[链接](https://github.com/linjungz/cloud9/blob/master/README.md)使用我们提供的Cloud Formation模板，请点击北京区域或者宁夏区域的Launch Stack。
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/a.png">
+![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/a.png)
+</a>
 
-- Connect to your device
-- Navigate to the directory your IOT certificates are located in
-- Create a new file by running the following command via the command line
+模板将会启动一台EC2，并配置好Cloud9（云IDE）方便您管理您的IoT设备。点击链接后请登陆您的AWS账号，之后在创建堆栈界面点击创建堆栈。请记住参数中的c9 username以及c9 password，您之后将使用这两个参数登陆Cloud9。
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/0.png">
+![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/0.png)
+</a>
 
-```sh
-touch simulatedVan.py
-```
+- 之后您将在CloudFormation控制台看到堆栈：Cloud9的创建信息，等待状态变成CREATE_COMPLETE
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/1.png">
+![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/1.png)
+</a>
 
-- Open this file with your favorite editor
-- We will start by setting up the required libraries and certificates within our code
+- 在堆栈输出的Cloud9的键对应的值将会是您的Cloud9链接，点击链接并确保公司VPN是关闭的，否则您将无法访问8181端口。在弹出的登陆窗中输入您刚才记住的c9 username以及c9 password。如果忘记了可在堆栈的参数中看到。
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/2.png">
+![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/2.png)
+</a>
 
-```python
-#!/usr/bin/python
-#Lab 10 - Streaming data to Elasticsearch via AWS IoT
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/2a.png">
+![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/2a.png)
+</a>
 
-import sys
-import ssl
-from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
-import json
-import random
-import time
+### 3.2 配置连接
 
-#Setup our MQTT client and security certificates
-#Make sure your certificate names match what you downloaded from AWS IoT
+进入页面后您将看到一个云IDE，下方有一个终端，左方的workspace可以看到您现有的文件
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/2b.png">
+![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/2b.png)
+</a>
 
-mqttc = AWSIoTMQTTClient("1234")
-
-#Make sure you use the correct region!
-mqttc.configureEndpoint("data.iot.us-west-2.amazonaws.com",8883)
-mqttc.configureCredentials("./rootCA.pem","./privateKey.pem","./certificate.pem")
-```
-
-- We will then define our json encoding function and assign it to our AWS IOT variable
-
-```python
-def json_encode(string):
-        return json.dumps(string)
-
-mqttc.json_encode=json_encode
-```
-
-- We will then write our code to connect to the message hub and notify us that we connected
-
-```python
-#Connecting to the message broker
-mqttc.connect()
-print "Connected"
-```
-
-- We are then going to write the loop that is going to generate our data. It should be noted that this data is being generated randomly and your results will be unique to you.
-
-```python
-#For loop to generate our data
-while True:
-    try:
-        x
-    except NameError:
-        x = 1412638168724
-        lon = 39.09972
-        lat = -94.57853
-        pre =111
-        engTemp = 211
-        carTemp = 41
-        rpm = 2216
-        speed = 18
-        bat = 12.3
-    else :
-        lon = lon + (random.randrange(-1,2,1) * float(format(random.random()* .001,'.5f')))
-        lat = lat + (random.randrange(-1,2,1) * float(format(random.random()* .001,'.5f')))
-        pre = pre + int(random.randrange(-1,2,1) *random.random()* 5)
-        engTemp = engTemp + int(random.randrange(-1,2,1) *random.random()* 5)
-        carTemp = carTemp + int(random.randrange(-1,2,1) *random.random()* 5)
-        rpm = rpm + int(random.randrange(-1,2,1) *random.random()* 10)
-        speed = speed + int(random.randrange(-1,2,1) *random.random()*2)
-        bat = bat + float(random.randrange(-1,2,1) * float(format(random.random()* .1,'.1f')))
-        message ={
-          'nms':  "%s" % (x),
-          'location': "%s, %s" % (lon,lat),
-          'geoJSON': {
-            'type': "Point",
-            'coordinates':[
-                "%s" % (lon),
-                "%s" % (lat)
-            ]},
-          'pressure': pre,
-          'engine_temperature' : engTemp,
-          'cargo_temperature': carTemp,
-          'rpm':rpm,
-          'speed' : speed,
-          'battery': bat
-        }
-        message = mqttc.json_encode(message)
-        mqttc.publish("truck/truck1", message, 0)
-        print "Message published. Data:" + message
-        time.sleep(2)
-```
-
-- Full Source Code
-
-```python
-#!/usr/bin/python
-#Lab 10 - Streaming data to Elasticsearch via AWS IoT
-
-import sys
-import ssl
-from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
-import json
-import random
-import time
-
-#Setup our MQTT client and security certificates
-#Make sure your certificate names match what you downloaded from AWS IoT
-
-mqttc = AWSIoTMQTTClient("1234")
-
-#Make sure you use the correct region!
-mqttc.configureEndpoint("data.iot.us-west-2.amazonaws.com",8883)
-mqttc.configureCredentials("./rootCA.pem","./privateKey.pem","./certificate.pem")
-
-def json_encode(string):
-        return json.dumps(string)
-
-mqttc.json_encode=json_encode
-
-#Connecting to the message broker
-mqttc.connect()
-print "Connected"
-
-#For loop to generate our data
-while True:
-    try:
-        x
-    except NameError:
-        x = 1412638168724
-        lon = 39.09972
-        lat = -94.57853
-        pre =111
-        engTemp = 211
-        carTemp = 41
-        rpm = 2216
-        speed = 18
-        bat = 12.3
-    else :
-        lon = lon + (random.randrange(-1,2,1) * float(format(random.random()* .001,'.5f')))
-        lat = lat + (random.randrange(-1,2,1) * float(format(random.random()* .001,'.5f')))
-        pre = pre + int(random.randrange(-1,2,1) *random.random()* 5)
-        engTemp = engTemp + int(random.randrange(-1,2,1) *random.random()* 5)
-        carTemp = carTemp + int(random.randrange(-1,2,1) *random.random()* 5)
-        rpm = rpm + int(random.randrange(-1,2,1) *random.random()* 10)
-        speed = speed + int(random.randrange(-1,2,1) *random.random()*2)
-        bat = bat + float(random.randrange(-1,2,1) * float(format(random.random()* .1,'.1f')))
-        message ={
-          'nms':  "%s" % (x),
-          'location': "%s, %s" % (lon,lat),
-          'geoJSON': {
-            'type': "Point",
-            'coordinates':[
-                "%s" % (lon),
-                "%s" % (lat)
-            ]},
-          'pressure': pre,
-          'engine_temperature' : engTemp,
-          'cargo_temperature': carTemp,
-          'rpm':rpm,
-          'speed' : speed,
-          'battery': bat
-        }
-        message = mqttc.json_encode(message)
-        mqttc.publish("truck/truck1", message, 0)
-        print "Message published. Data:" + message
-        time.sleep(2)
-```
-
-- After you have written this file save it to the device. Within the terminal run the following command to generate the simulated connected vehicles data
+- 在Cloud9的终端中输入此命令来下载根证书
 
 ```sh
-python simulatedVan.py
+  curl https://www.amazontrust.com/repository/AmazonRootCA1.pem > root-CA.crt
 ```
 
-- You should be seeing data messages being sent to topic “truck/truck1” in your terminal window or you can also check to see if the data is being sent to the message broker by going to the IOT dashboard and clicking on MQTTC client and subscribing to “truck/truck1” or “truck/#”
+- 上传您的cert.pem以及private.pem
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/3.png">
+![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/3.png)
+</a>
 
-    Note: the # in the topic name is a special character that allows us to aggregate all the data. This character acts as a wildcard and must be the last character in the topic you subscribe to. For further reading click here.
+- 在终端中输入此命令来下载car_publish.py文件，点击打开
+
+```sh
+wget https://raw.githubusercontent.com/lanskyfan/iot-cv-demo/master/src/car_publish.py
+```
+
+- 此时您的所有文件将包括以下这些
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/4.png">
+![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/4.png)
+</a>
+
+- 将car_publish.py中的IoT终端节点、证书、私钥文件名替换为您的节点以及文件名
+
+```python
+#Setup MQTT client and security certificates
+mqttc = AWSIoTMQTTClient("MyIoTDevice") 
+mqttc.configureEndpoint("ChangeToYouEnd.iot.cn-north-1.amazonaws.com.cn",8883)
+
+mqttc.configureCredentials(
+  './root-CA.crt',
+  './MyIoTDevice.private.key',
+  './MyIoTDevice.cert.pem'
+)
+```
+
+- 如需寻找您的终端节点，请打开IoT服务，进入您的物品，并进入交互部分
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/5.png">
+![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/5.png)
+</a>
+
+- 在终端运行您的car_publish.py文件,传递的数据将会显示在您的终端上
+
+```sh
+python car_publish.py
+```
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/6.png">
+![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/6.png)
+</a>
 
 ## 4. 设置Kibana进行数据可视化
 
@@ -408,9 +295,14 @@ python simulatedVan.py
 https://search-iot-lab-xxxxxxxxxxxxx.us-east-1.es.amazonaws.com/_plugin/kibana/
 ```
 
-- 进入Kibana的discovery侧边栏，选择Create index pattern，并在index pattern中输入“trucks”。匹配成功后会显示Success，之后请点击Next step
+- 进入Kibana的discover侧边栏，选择Create index pattern，并在index pattern中输入“cars”。匹配成功后会显示Success，之后请点击Next step
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/40.png">
 ![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/40.png)
+</a>
+
+- 如果无法找到create index pattern，请点击Kibana的图标，然后选择Index patterns。
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/32a.png">
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/32a.png)
 </a>
 
 - 从下拉菜单中选择Time Filter field name为datetime。点击create index pattern。
@@ -418,7 +310,7 @@ https://search-iot-lab-xxxxxxxxxxxxx.us-east-1.es.amazonaws.com/_plugin/kibana/
 ![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/41.png)
 </a>
 
-- 您将看见刚刚创建的index pattern: trucks*。
+- 您将看见刚刚创建的index pattern: cars*。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/42.png">
 ![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/42.png)
 </a>
@@ -435,12 +327,12 @@ https://search-iot-lab-xxxxxxxxxxxxx.us-east-1.es.amazonaws.com/_plugin/kibana/
 ![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/44.png)
 </a>
 
-- 选择trucks*。
+- 选择cars*。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/45.png">
 ![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/45.png)
 </a>
 
-- 打开Metrics Y-Axis的下拉菜单，在Aggregation中选择average，Field选择engine_tempterature。
+- 打开Metrics Y-Axis的下拉菜单，在Aggregation中选择average，Field选择engine_tempterature,然后点击add metrics。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/46.png">
 ![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/46.png)
 </a>

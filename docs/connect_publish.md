@@ -69,8 +69,6 @@ iot core上生成证书, 策略
 
 ## 2. 安装SDK并连接设备
 
-### 2.1 安装SDK
-
 - 将刚刚下载的 “connect_device_package”文件夹中的文件上传至您的EC2中并与您的压缩包处于同一文件夹内。运行以下命令解压：
 
 ```sh
@@ -110,7 +108,3 @@ sudo ./start.sh
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page2/2.png">
 ![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page2/2.png)
 </a>
-
-## 3. 运行car_publish.py文件
-
-###3.1 更改
