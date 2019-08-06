@@ -194,32 +194,38 @@ SELECT *, timestamp() as timestamp FROM 'connectedcar/#'
 ```
 
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/27.png">
-![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/27.png)
 </a>
+
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/27.png)
 
 - 点击添加操作，选择将消息发送到Amazon Elasticsearch Service，点击配置操作
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/28.png">
-![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/28.png)
 </a>
+
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/28.png)
 
 - 选择资源为"iot-lab", ID输入“${newuuid()}”，索引输入“cars“， 类型输入“car”。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/29.png">
-![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/29.png)
 </a>
+
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/29.png)
 
 - 选择角色为iot-es-action-role。 
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/30.png">
-![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/30.png)
 </a>
+
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/30.png)
 
 - 创建规则。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/31.png">
-![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/31.png)
 </a>
 
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/31.png)
+
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/32.png">
-![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/32.png)
 </a>
+
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/32.png)
 
 ## 3. 发送数据至Elasticsearch
 
@@ -227,34 +233,40 @@ SELECT *, timestamp() as timestamp FROM 'connectedcar/#'
 
 - 请点击此GitHub[链接](https://github.com/linjungz/cloud9/blob/master/README.md)使用我们提供的Cloud Formation模板，请点击北京区域或者宁夏区域的Launch Stack。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/a.png">
-![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/a.png)
 </a>
+
+![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/a.png)
 
 模板将会启动一台EC2，并配置好Cloud9（云IDE）方便您管理您的IoT设备。点击链接后请登陆您的AWS账号，之后在创建堆栈界面点击创建堆栈。请记住参数中的c9 username以及c9 password，您之后将使用这两个参数登陆Cloud9。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/0.png">
-![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/0.png)
 </a>
+
+![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/0.png)
 
 - 之后您将在CloudFormation控制台看到堆栈：Cloud9的创建信息，等待状态变成CREATE_COMPLETE
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/1.png">
-![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/1.png)
 </a>
+
+![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/1.png)
 
 - 在堆栈输出的Cloud9的键对应的值将会是您的Cloud9链接，点击链接并确保公司VPN是关闭的，否则您将无法访问8181端口。在弹出的登陆窗中输入您刚才记住的c9 username以及c9 password。如果忘记了可在堆栈的参数中看到。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/2.png">
-![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/2.png)
 </a>
 
+![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/2.png)
+
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/2a.png">
-![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/2a.png)
 </a>
+
+![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/2a.png)
 
 ### 3.2 配置连接
 
 进入页面后您将看到一个云IDE，下方有一个终端，左方的workspace可以看到您现有的文件
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/2b.png">
-![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/2b.png)
 </a>
+
+![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/2b.png)
 
 - 在Cloud9的终端中输入此命令来下载根证书
 
@@ -264,8 +276,9 @@ SELECT *, timestamp() as timestamp FROM 'connectedcar/#'
 
 - 上传您的cert.pem以及private.pem
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/3.png">
-![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/3.png)
 </a>
+
+![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/3.png)
 
 - 在终端中输入此命令来下载car_publish.py文件，点击打开
 
@@ -275,8 +288,9 @@ wget https://raw.githubusercontent.com/lanskyfan/iot-cv-demo/master/src/car_publ
 
 - 此时您的所有文件将包括以下这些
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/4.png">
-![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/4.png)
 </a>
+
+![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/4.png)
 
 - 将car_publish.py中的IoT终端节点、证书、私钥文件名替换为您的节点以及文件名
 
@@ -294,8 +308,9 @@ mqttc.configureCredentials(
 
 - 如需寻找您的终端节点，请打开IoT服务，进入您的物品，并进入交互部分
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/5.png">
-![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/5.png)
 </a>
+
+![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/5.png)
 
 - 在终端运行您的car_publish.py文件,传递的数据将会显示在您的终端上
 
@@ -303,8 +318,9 @@ mqttc.configureCredentials(
 python car_publish.py
 ```
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/6.png">
-![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/6.png)
 </a>
+
+![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/6.png)
 
 ## 4. 设置Kibana进行数据可视化
 
@@ -318,57 +334,68 @@ https://search-iot-lab-xxxxxxxxxxxxx.us-east-1.es.amazonaws.com/_plugin/kibana/
 
 - 进入Kibana的discover侧边栏，选择Create index pattern，并在index pattern中输入“cars”。匹配成功后会显示Success，之后请点击Next step
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/40.png">
-![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/40.png)
 </a>
+
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/40.png)
 
 - 如果无法找到create index pattern，请点击Kibana的图标，然后选择Index patterns。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/32a.png">
-![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/32a.png)
 </a>
+
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/32a.png)
 
 - 从下拉菜单中选择Time Filter field name为datetime。点击create index pattern。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/41.png">
-![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/41.png)
 </a>
+
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/41.png)
 
 - 您将看见刚刚创建的index pattern: cars*。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/42.png">
-![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/42.png)
 </a>
+
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/42.png)
 
 ### 4.2 数据可视化
 
 - 接下来进入Visualize侧边栏，选择create a visualization。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/43.png">
-![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/43.png)
 </a>
+
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/43.png)
 
 - 选择Line作为我们要创建的图的类型。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/44.png">
-![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/44.png)
 </a>
+
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/44.png)
 
 - 选择cars*。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/45.png">
-![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/45.png)
 </a>
+
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/45.png)
 
 - 打开Metrics Y-Axis的下拉菜单，在Aggregation中选择average，Field选择engine_tempterature,然后点击add metrics。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/46.png">
-![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/46.png)
 </a>
+
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/46.png)
 
 - 打开Buckets X-Axis的下拉菜单，在Aggregation中选择Date Histogram，Field选择datetime。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/47.png">
-![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/47.png)
 </a>
+
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/47.png)
 
 - 点击蓝色的开始按钮就将生成图像。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/48.png">
-![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/48.png)
 </a>
+
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/48.png)
 
 - 右上角的蓝色Refresh按钮可以刷新图像来预览最新数据。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/49.png">
-![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/49.png)
 </a>
+
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/49.png)
