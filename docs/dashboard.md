@@ -15,6 +15,7 @@ toc: true
 - 在AWS官网通过搜索进入Elasticsearch Service。
 <a data-fancybox="gallery" href="./img/dashboard/1.png">
 </a>
+
 ![Get started](./img/dashboard/1.png)
 
 - 在Elasticsearch Service首页选择“创建新域”。
