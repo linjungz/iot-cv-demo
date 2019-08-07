@@ -87,7 +87,7 @@ toc: true
 
 ![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/8.png)
 
-- 点击“iot-lab“，您将进入域的详细页面。在此处您将看到Kibana链接，点击Kibana链接以访问Kibana网页，如果无法进入网页，请再次检查您的IP地址是否正确，如果有问题请修改访问策略。
+- 点击“iot-lab“，您将进入域的详细页面。在此处您将看到Kibana链接，点击Kibana链接以访问Kibana网页，如果无法进入网页，请再次检查您的IP地址是否正确，如果有问题请修改访问策略。可使用CIDR表示方法达到更宽松的条件。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/9.png">
 </a>
 
@@ -216,7 +216,7 @@ SELECT *, timestamp() as timestamp FROM 'connectedcar/#'
 
 ![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/30.png)
 
-- 创建规则。
+- 反复检查没有遗漏后，请创建规则。如果显示SQL错误而无法创建，请先将FROM 'connectedcar/#' 语句删除，在创建之后再更新规则
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/31.png">
 </a>
 
@@ -231,6 +231,7 @@ SELECT *, timestamp() as timestamp FROM 'connectedcar/#'
 
 ### 3.1 使用Cloud Formation生成IoT设备
 
+- 在进行这一步之前，请确保您在IoT中已经注册了一个可用的IoT设备。如果还没有注册设备，请参考connect_publish文件。
 - 请点击此GitHub[链接](https://github.com/linjungz/cloud9/blob/master/README.md)使用我们提供的Cloud Formation模板，请点击北京区域或者宁夏区域的Launch Stack。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/a.png">
 </a>
@@ -274,7 +275,7 @@ SELECT *, timestamp() as timestamp FROM 'connectedcar/#'
   curl https://www.amazontrust.com/repository/AmazonRootCA1.pem > root-CA.crt
 ```
 
-- 上传您的cert.pem以及private.pem
+- 上传您的xxx.cert.pem以及xxx.private.pem
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/3.png">
 </a>
 
