@@ -77,37 +77,105 @@ iot core上生成证书, 策略
 
 ![名字](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/10.png)
 
-## 2. 安装SDK并连接设备
+### 1.3 创建新的策略
 
-- 将刚刚下载的 “connect_device_package”文件夹中的文件上传至您的EC2中并与您的压缩包处于同一文件夹内。运行以下命令解压：
+- 下面我们将创建自己的证书来代替刚刚自动生成的证书。首先，在主控制台的“安全”->“策略”中点击“创建证书”
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/11.png">
+</a>
+
+![名字](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/11.png)
+
+- 对于策略设定一个您喜欢的名字，在操作中输入“iot:*”，在资源ARN中输入“\*”，对于效果选择“允许”，点击创建。
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/12.png">
+</a>
+
+![名字](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/12.png)
+
+- 在主控制台的“管理”->“物品”中单击您刚刚创建的物品，进入详情页面。
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/13.png">
+</a>
+
+![名字](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/13.png)
+
+- 选择“安全性”，在此处可以看见物品的证书，点击证书。
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/14.png">
+</a>
+
+![名字](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/14.png)
+
+-在“策略”中找到您刚刚自动生成的策略，点击右上角将其分离。
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/15.png">
+</a>
+
+![名字](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/15.png)
+
+- 选择“操作”->“附加策略”
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/16.png">
+</a>
+
+![名字](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/16.png)
+
+- 请将刚刚创建的策略附加到证书。
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/17.png">
+</a>
+
+![名字](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/17.png)
+
+## 2. 将设备连接
+
+- 在Cloud9的终端中输入此命令来下载根证书
 
 ```sh
-unzip connect_device_package.zip
+  curl https://www.amazontrust.com/repository/AmazonRootCA1.pem > root-CA.crt
 ```
 
-- 运行以下命令检查EC2中是否安装了git
+- 上传您的xxx.cert.pem以及xxx.private.pem
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/3.png">
+</a>
+
+![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/3.png)
+
+- 在终端中输入此命令来下载car_publish.py文件，点击打开
 
 ```sh
-git --version
+wget https://raw.githubusercontent.com/lanskyfan/iot-cv-demo/master/src/car_publish.py
 ```
 
-- 如没有安装git，请使用以下命令安装
+- 此时您的所有文件将包括以下这些
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/4.png">
+</a>
+
+![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/4.png)
+
+- 将car_publish.py中的IoT终端节点、证书、私钥文件名替换为您的节点以及文件名
+
+```python
+#Setup MQTT client and security certificates
+mqttc = AWSIoTMQTTClient("MyIoTDevice") 
+mqttc.configureEndpoint("ChangeToYouEnd.iot.cn-north-1.amazonaws.com.cn",8883)
+
+mqttc.configureCredentials(
+  './root-CA.crt',
+  './MyIoTDevice.private.key',
+  './MyIoTDevice.cert.pem'
+)
+```
+
+- 如需寻找您的终端节点，请打开IoT服务，进入您的物品，并进入交互部分
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/5.png">
+</a>
+
+![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/5.png)
+
+- 在终端使用python3运行您的car_publish.py文件,传递的数据将会显示在您的终端上
 
 ```sh
-sudo yum install git -y
+python3 car_publish.py
 ```
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/6.png">
+</a>
 
-- 进入解压后的文件夹中，添加执行权限
-
-```sh
-chmod +x start.sh
-```
-
-- 运行启动脚本，脚本将自动下载根证书以及SDK并启动连接
-
-```sh
-sudo ./start.sh
-```
+![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/6.png)
 
 - 回到IoT主页中，进入测试并点击订阅
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page2/1.png">
@@ -115,7 +183,7 @@ sudo ./start.sh
 
 ![订阅](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page2/1.png)
 
-- 在订阅主题栏中输入“#”并点击订阅主题，您将看到从您的EC2发送的“Hello World!“消息。
+- 在订阅主题栏中输入“#”并点击订阅主题，您将看到从您的EC2发送的消息。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page2/2.png">
 </a>
 
