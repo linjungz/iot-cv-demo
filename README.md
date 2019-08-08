@@ -13,7 +13,7 @@
 - MQTT Publish/Subscribe
 
 
-#### 数据在云端展现
+#### [Lab 02. 数据在云端展现](docs/02_data_visualize.md)
 - IoT Rule Engine -> ElasticSearch -> Kibana
 
 #### 数据在云端归档保存
