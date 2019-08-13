@@ -151,8 +151,8 @@ wget https://raw.githubusercontent.com/lanskyfan/iot-cv-demo/master/src/car_publ
 
 ```python
 #Setup MQTT client and security certificates
-mqttc = AWSIoTMQTTClient("MyIoTDevice") # 需要更改
-mqttc.configureEndpoint("ChangeToYouEnd.iot.cn-north-1.amazonaws.com.cn",8883) # 需要更改（见下文）
+mqttc = AWSIoTMQTTClient("MyIoTDevice") # 更改为您的IoT设备名称
+mqttc.configureEndpoint("ChangeToYouEnd.iot.cn-north-1.amazonaws.com.cn",8883) # 需要更改（方法见下文）
 
 mqttc.configureCredentials(
   './root-CA.crt',                # 参考Cloud9中的文件名更改
@@ -161,7 +161,7 @@ mqttc.configureCredentials(
 )
 ```
 
-- 如需寻找您的终端节点，请打开IoT服务，进入您的物品，并进入交互部分
+- 如需寻找您的终端节点，请打开IoT服务，进入您的物品，并进入交互部分，请将终端节点记住。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/5.png">
 </a>
 
