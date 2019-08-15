@@ -58,7 +58,7 @@ toc: true
 
 ![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/7.png)
 
-- 此时您的访问策略应该显示为如下形式, "aws:SourceIp":之后是您的IP地址，确认之后点击下一步。
+- 此时您的访问策略应该显示为如下形式, "aws:SourceIp":之后是您的IP地址，这里通常不需要进一步调整了。确认之后点击下一步。
 
 ```json
 {
@@ -100,7 +100,7 @@ toc: true
 
 ### 1.2 在Elasticsearch集群上建立索引
 
-- 在这里我们使用HTTP请求来建立索引，请在终端输入如下命令，请把最下面一行的链接替换为您的集群的终端节点，在“iot-lab”的详细页面可以找到。
+- 在这里我们使用HTTP请求来建立索引，请在终端输入如下命令，
 
 ```sh
 curl -H 'Content-Type: application/json' -i -X PUT -d '{
@@ -137,7 +137,19 @@ curl -H 'Content-Type: application/json' -i -X PUT -d '{
 ' 'https://search-iot-lab-xxxxxxxxxxxxxxxxxxxxx.cn-north-1.es.amazonaws.com.cn/cars'
 ```
 
-如果成功您将收到状态“ {“acknowledged”:true)”。如果不成功，请检查Kibana能否进入。如果不能进入，请调整访问策略。
+请把最下面一行的
+
+```sh
+https://search-iot-lab-xxxxxxxxxxxxxxxxxxxxx.cn-north-1.es.amazonaws.com.cn/cars
+```
+
+替换为您的集群的终端节点，在“iot-lab”的详细页面可以找到：
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/11.png">
+</a>
+
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/11.png)
+
+如果成功您将在终端收到状态“ {“acknowledged”:true)”。如果不成功，请检查Kibana能否进入。如果不能进入，请调整访问策略，比如使用xxx.xxx.xxx.xxx/16代替IP。
 
 ## 2. 设置规则将数据存入ES
 
@@ -236,6 +248,11 @@ SELECT *, timestamp() as timestamp FROM 'connectedcar/#'
 ```sh
 https://search-iot-lab-xxxxxxxxxxxxx.us-east-1.es.amazonaws.com/_plugin/kibana/
 ```
+
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/33.png">
+</a>
+
+![Get started](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/33.png)
 
 - 进入Kibana的discover侧边栏，选择Create index pattern，并在index pattern中输入“cars”。匹配成功后会显示Success，之后请点击Next step
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/dashboard/40.png">

@@ -103,7 +103,7 @@ iot core上生成证书, 策略
 
 ![名字](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/14.png)
 
--在“策略”中找到您刚刚自动生成的策略，点击右上角将其分离。
+- 在“策略”中找到您刚刚自动生成的策略，点击右上角将其分离。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/15.png">
 </a>
 
@@ -129,7 +129,7 @@ iot core上生成证书, 策略
   curl https://www.amazontrust.com/repository/AmazonRootCA1.pem > root-CA.crt
 ```
 
-- 上传您的xxx.cert.pem以及xxx.private.pem
+- 上传您的xxx.cert.pem以及xxx.private.pem，此文件位于您刚刚解压的connect_device_package压缩包中。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/3.png">
 </a>
 
@@ -147,21 +147,21 @@ wget https://raw.githubusercontent.com/lanskyfan/iot-cv-demo/master/src/car_publ
 
 ![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/4.png)
 
-- 将car_publish.py中的IoT终端节点、证书、私钥文件名替换为您的节点以及文件名
+- 将car_publish.py中的IoT终端节点、证书、私钥文件名替换为您的节点以及文件名：
 
 ```python
 #Setup MQTT client and security certificates
-mqttc = AWSIoTMQTTClient("MyIoTDevice") 
-mqttc.configureEndpoint("ChangeToYouEnd.iot.cn-north-1.amazonaws.com.cn",8883)
+mqttc = AWSIoTMQTTClient("MyIoTDevice") # 更改为您的IoT设备名称
+mqttc.configureEndpoint("ChangeToYouEnd.iot.cn-north-1.amazonaws.com.cn",8883) # 需要更改（方法见下文）
 
 mqttc.configureCredentials(
-  './root-CA.crt',
-  './MyIoTDevice.private.key',
-  './MyIoTDevice.cert.pem'
+  './root-CA.crt',                # 参考Cloud9中的文件名更改
+  './MyIoTDevice.private.key',    # 参考Cloud9中的文件名更改
+  './MyIoTDevice.cert.pem'        # 参考Cloud9中的文件名更改
 )
 ```
 
-- 如需寻找您的终端节点，请打开IoT服务，进入您的物品，并进入交互部分
+- 如需寻找您的终端节点，请打开IoT服务，进入您的物品，并进入交互部分，请将终端节点记住。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/5.png">
 </a>
 
@@ -172,6 +172,7 @@ mqttc.configureCredentials(
 ```sh
 python3 car_publish.py
 ```
+
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/6.png">
 </a>
 
@@ -183,8 +184,15 @@ python3 car_publish.py
 
 ![订阅](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page2/1.png)
 
-- 在订阅主题栏中输入“#”并点击订阅主题，您将看到从您的EC2发送的消息。
+- 在订阅主题栏中输入“connectedcar/telemetry/#”并点击订阅主题，您将看到从您的EC2发送的消息。
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page2/2.png">
 </a>
 
 ![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page2/2.png)
+
+- 消息类似下图
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page2/3.png">
+</a>
+
+![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page2/3.png)
+
