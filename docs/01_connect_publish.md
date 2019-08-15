@@ -189,3 +189,10 @@ python3 car_publish.py
 </a>
 
 ![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page2/2.png)
+
+- 消息类似下图
+<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page2/3.png">
+</a>
+
+![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page2/3.png)
+
