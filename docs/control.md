@@ -47,13 +47,13 @@ toc: true
 - 在终端中输入此命令来下载light.py文件
 
 ```sh
-wget https://raw.githubusercontent.com/lanskyfan/iot-cv-demo/master/src/car_publish.py
+wget https://raw.githubusercontent.com/lanskyfan/iot-cv-demo/master/src/light.py
 ```
 
 - 在终端中输入此命令来下载light_controller.py文件
 
 ```sh
-wget https://raw.githubusercontent.com/lanskyfan/iot-cv-demo/master/src/car_publish.py
+wget https://raw.githubusercontent.com/lanskyfan/iot-cv-demo/master/src/light_controller.py
 ```
 
 - 此时您的所有文件将包括以下这些
