@@ -19,7 +19,7 @@
 #### 数据在云端归档保存
 - IoT Rule Engine -> Kinesis Firehose -> S3
 
-#### 控制指令下发至车端
+#### [Lab 04. 控制指令下发至车端](docs/04_control.md)
 - IoT Shadow
 
 #### Web端接入
