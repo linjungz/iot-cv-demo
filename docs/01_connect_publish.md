@@ -151,7 +151,7 @@ wget https://raw.githubusercontent.com/lanskyfan/iot-cv-demo/master/src/car_publ
 
 ```python
 #Setup MQTT client and security certificates
-mqttc = AWSIoTMQTTClient("MyIoTDevice") # 更改为您的IoT设备名称
+mqttc = AWSIoTMQTTClient("MyIoTDevice") 
 mqttc.configureEndpoint("ChangeToYouEnd.iot.cn-north-1.amazonaws.com.cn",8883) # 需要更改（方法见下文）
 
 mqttc.configureCredentials(
