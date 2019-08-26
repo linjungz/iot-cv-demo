@@ -28,19 +28,19 @@ toc: true
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/9.png">
 </a>
 
-![名字](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/9.png)
+![名字](./md_image/page1/9.png)
 
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/12.png">
 </a>
 
-![名字](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/12.png)
+![名字](./md_image/page1/12.png)
 
 - 默认您在Cloud9中拥有这些文件
 
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/4.png">
 </a>
 
-![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/4.png)
+![Hello](./md_image/code/4.png)
 
 - 此时我们可以开始新的步骤了。
 
@@ -60,7 +60,7 @@ wget https://raw.githubusercontent.com/lanskyfan/iot-cv-demo/master/src/light_co
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/control/1.png">
 </a>
 
-![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/control/1.png)
+![Hello](./md_image/control/1.png)
 
 - 将light.py中的IoT终端节点、证书、私钥文件名替换为您的节点以及文件名：
 
@@ -115,7 +115,7 @@ python3 light.py
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/control/2.png">
 </a>
 
-![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/control/2.png)
+![Hello](./md_image/control/2.png)
 
 - 请在终端按Enter
 
@@ -123,7 +123,7 @@ python3 light.py
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/control/3.png">
 </a>
 
-![订阅](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/control/3.png)
+![订阅](./md_image/control/3.png)
 
 - 返回Cloud9页面，新建终端，运行您的light_controller.py
 
@@ -136,18 +136,18 @@ python3 light_controller.py
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/control/4.png">
 </a>
 
-![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/control/4.png)
+![Hello](./md_image/control/4.png)
 
 - 返回运行light.py的终端，您将收到刚刚对device所做的更改，点击Enter
 
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/control/5.png">
 </a>
 
-![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/control/5.png)
+![Hello](./md_image/control/5.png)
 
 - 在物品的影子栏目，您将看到新的影子状态
 
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/control/6.png">
 </a>
 
-![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/control/6.png)
+![Hello](./md_image/control/6.png)
