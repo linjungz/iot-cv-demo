@@ -17,7 +17,7 @@ toc: true
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/0.png">
 </a>
 
-![Hello](https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/0.png)
+![Hello](./md_image/code/0.png)
 
 - 之后您将在CloudFormation控制台看到堆栈：Cloud9的创建信息，等待状态变成CREATE_COMPLETE
 <a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/1.png">
