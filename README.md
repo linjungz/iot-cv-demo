@@ -16,7 +16,7 @@
 #### [Lab 02. 数据在云端展现](docs/02_data_visualize.md)
 - IoT Rule Engine -> ElasticSearch -> Kibana
 
-#### 数据在云端归档保存
+#### [Lab 03. 数据在云端归档保存]
 - IoT Rule Engine -> Kinesis Firehose -> S3
 
 #### [Lab 04. 控制指令下发至车端](docs/04_control.md)
