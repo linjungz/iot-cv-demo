@@ -72,6 +72,8 @@ def shadow_get_init_callback(payload, responseStatus, token):
                 print('Brightness -> ' + device_state_brightness)
                 print('Pending change for brightness has been applied to device')
             input('Now you can check the shadow document in AWS Console before I update it. Press Enter to continue.')
+        elif payloadDict['state'] == {} :
+            print('Empty shadow. Need to initialize it.')
         else:
             print("There's no delta in Shadow, so report the initial state")
             device_state_color = payloadDict['state']['reported']['color']
