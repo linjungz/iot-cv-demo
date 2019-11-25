@@ -13,7 +13,7 @@ import time
 
 #Setup Shadow client and security certificates
 shadowc = AWSIoTMQTTShadowClient('Light1_controller')
-shadowc.configureEndpoint("a35ihvt9dy96rh.ats.iot.cn-north-1.amazonaws.com.cn",8883)
+shadowc.configureEndpoint("ChangeToYourEndpoint.ats.iot.cn-north-1.amazonaws.com.cn",8883)
 
 shadowc.configureCredentials(
   './root-CA.crt',
