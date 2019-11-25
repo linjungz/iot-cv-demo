@@ -1,5 +1,5 @@
-# iot-cv-demo
-基于AWS IoT构建车联网平台的演示环境
+# 基于AWS IoT动手搭建一个车联网平台
+基于AWS IoT构建车联网平台的演示环境，并作为IoT Builder's Day的动手实验材料
 
 ## 目标
 - 通过AWS IoT服务构建一个完整的车联网平台, 包括车辆接入与管理, 数据上传与指令下发, OTA等车联网常见功能.
@@ -8,44 +8,20 @@
 
 ## 内容框架
 ### AWS IoT 基本功能
-#### [Lab 01. 车辆接入IoT并上传数据](docs/01_connect_publish.md)
-- IoT 事物/证书/策略的创建
-- MQTT Publish/Subscribe
 
+#### [Lab 00. 实验环境准备](docs/00_cloud9.md)
+在这个实验中我们将会演示如何在AWS中国区域Marketplace启动一台带有Cloud9 Web IDE的EC2实例，后续实验会以此实例运行相应的python脚本，以模拟IoT设备行为。
+
+#### [Lab 01. 车辆接入IoT并上传数据](docs/01_connect_publish.md)
+在这个实验中我们将演示如何创建一个IoT Thing并将模拟设备接入AWS IoT，通过模拟设备向AWS IoT云端发送传感器数据
 
 #### [Lab 02. 数据在云端展现](docs/02_data_visualize.md)
-- IoT Rule Engine -> ElasticSearch -> Kibana
+在这个实验中我们将演示如何将AWS IoT云端收集到的传感器数据通过Rule Engine保存至ElasticSearch中，并利用Kibana进行实时展现
 
 #### [Lab 03. 数据在云端归档保存]
-- IoT Rule Engine -> Kinesis Firehose -> S3
+在这个实验中我们将演示如何将AWS IoT云端收集到的传感器数据通过Rule Engine打到Kinesis Firehose并存入S3中，进而实现数据在云端的归档保存
 
 #### [Lab 04. 控制指令下发至车端](docs/04_control.md)
-- IoT Shadow
+在这个实验中我们将演示如何利用AWS IoT Shadow来进行设备状态的控制
 
-#### Web端接入
-- 数据展现
-- 指令下发
-- Node-Red
-
-#### OTA
-- Job / Job Agent
-
-### AWS IoT 进阶功能
-#### 车辆批量接入车联网
-- IoT Device Management: Bulk Provisiong
-
-#### 车辆即时注册至车联网
-- IoT JITP/JITR
-
-#### 精细化控制车辆接入权限
-- IoT Policy
-
-#### Web端接入授权
-- Cognito Identity Pool 与第三方授权结合(Amazon Login/WeChat)
-
-#### 边缘计算
-- Greengrass
-
-
-### CVRA
-介绍AWS车联网参考架构CVRA
+#### 实验内容持续更新中...
