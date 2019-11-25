@@ -3,191 +3,136 @@
 本实验描述如何将模拟设备接入AWS IoT. 
 AWS IoT使用证书进行双向认证, 模拟设备接入前需要配置证书和策略,并将证书下载至设备端.
 
-## 1. AWS IoT 创建事物并配置证书和策略
-
-在AWS IoT上生成证书并配置策略
-
-### 1.1 登录 AWS IoT 控制台
+### 1. AWS IoT 创建事物(Thing)并下载证书/私钥
 
 - 登录到 AWS 管理控制台，然后选择服务中的IoT来打开 AWS IoT 控制台。
-
-<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/1.png">
-</a>
 
 ![Get started](./md_image/page1/1.png)
 
 - 请选择主页中的入门培训，点击入门。
-<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/2.png">
-</a>
 
 ![管理](./md_image/page1/2.png)
 
 - 这段教程将带您注册设备，下载相关文件，请继续点击入门。
-<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/3.png">
-</a>
 
 ![注册事物](./md_image/page1/3.png)
 
 - 请在“选择平台“选择“Linux/OSX”， 选择AWS IoT设备开发工具包选择“Python”，点击下一步。
-<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/4.png">
-</a>
 
 ![单个事物](./md_image/page1/4.png)
 
-### 1.2 注册物品并下载证书
-
-- 在这一步我们将开始注册物品，请为物品输入您喜欢的名称。这里为物品命名为“MyIoTDevice",请勿输入中文。点击下一步。
-<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/5.png">
-</a>
+- 在这一步我们将开始注册物品(Thing)，这里可以输入物品名字 “MyIoTDevice"，并点击下一步继续
 
 ![名字](./md_image/page1/5.png)
+*注意：Thing Name在每个AWS Account中必须唯一*
 
-- 这里为您刚刚注册的设备生成了一个策略、证书以及私有密钥。策略可以稍后查看，请点击“下载连接工具包”。工具包下载完毕后您会获得一个叫”connect_device_package.zip“的文件，请点击下一步。
-<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/6.png">
-</a>
+- 这里可以看到AWS IoT自动生成的策略、证书以及私有密钥。点击“下载连接工具包”，即 connect_device_package.zip 文件。下载完成后点击下一步继续。
 
 ![名字](./md_image/page1/6.png)
 
-- 这一步告诉您如何配置和测试设备，我们将在启动EC2虚拟机后用到，点击“完成”。
-<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/7.png">
-</a>
+- 点击“完成”结束Thing创建。
 
 ![名字](./md_image/page1/7.png)
 
-- 继续点击“完成”以完成IoT入门。
-<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/8.png">
-</a>
+- 继续点击“完成”结束该向导。
 
 ![名字](./md_image/page1/8.png)
 
-- 回到IoT主页，此时在管理-物品将能看的您刚刚注册的物品。
-<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/9.png">
-</a>
+- 回到IoT控制台页面，在“管理”-“物品”可以看到刚刚注册的Thing。
 
 ![名字](./md_image/page1/9.png)
 
-- 解压刚刚的”connect_device_package.zip“文件， 您会获得4个文件
-<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/10.png">
-</a>
 
+### 2. AWS IoT 创建策略(Policy)
+
+- AWS IoT的策略可以用来对IoT设备的连接和消息收发进行权限控制，这里为了演示需要，我们创建一个最为宽松的策略
+
+![](./md_image/page1/19.jpg)
+![](./md_image/page1/18.jpg)
+
+*注意：仅在测试环境使用宽松的策略，生产环境建议要遵循最小权限原则，仅授予设备所必须的最小权限*
+
+- 接下来我们将原来自动创建的策略从证书上分离
+
+点击“安全性”：
+![](./md_image/page1/20.jpg)
+
+点击证书：
+![](./md_image/page1/21.jpg)
+
+点击”策略“：
+![](./md_image/page1/22.jpg)
+
+点击”分离”，将原来创建的策略与证书分离：
+![](./md_image/page1/23.jpg)
+
+点击”附加策略“，
+![](./md_image/page1/24.jpg)
+
+将刚创建的宽松的策略附加到设备证书上：
+![](./md_image/page1/25.jpg)
+
+可以看到新的策略已经附加到证书上：
+![](./md_image/page1/26.jpg)
+
+*注：可以对比原有策略与新附加的策略上有什么不同？并尝试修改策略并逐步缩小权限，以了解策略中各个操作所代表的含义*
+
+### 3. 设备连接AWS IoT
+
+- 上传证书/私钥至Cloud9
+
+ 解压刚刚下载的”connect_device_package.zip“文件， 可以看到里面有4个文件
 ![名字](./md_image/page1/10.png)
 
-### 1.3 创建新的策略
+上传后缀为cert.pem和private.pem这两个文件，分别是刚才创建的Thing的设备证书和私钥
 
-- 下面我们将创建自己的证书来代替刚刚自动生成的证书。首先，在主控制台的“安全”->“策略”中点击“创建证书”
-<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/11.png">
-</a>
+![](./md_image/page1/27.jpg)
 
-![名字](./md_image/page1/11.png)
+- 下载AWS IoT根证书
 
-- 对于策略设定一个您喜欢的名字，在操作中输入“iot:*”，在资源ARN中输入“\*”，对于效果选择“允许”，点击创建。
-<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/12.png">
-</a>
-
-![名字](./md_image/page1/12.png)
-
-- 在主控制台的“管理”->“物品”中单击您刚刚创建的物品，进入详情页面。
-<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/13.png">
-</a>
-
-![名字](./md_image/page1/13.png)
-
-- 选择“安全性”，在此处可以看见物品的证书，点击证书。
-<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/14.png">
-</a>
-
-![名字](./md_image/page1/14.png)
-
-- 在“策略”中找到您刚刚自动生成的策略，点击右上角将其分离。
-<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/15.png">
-</a>
-
-![名字](./md_image/page1/15.png)
-
-- 选择“操作”->“附加策略”
-<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/16.png">
-</a>
-
-![名字](./md_image/page1/16.png)
-
-- 请将刚刚创建的策略附加到证书。
-<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page1/17.png">
-</a>
-
-![名字](./md_image/page1/17.png)
-
-## 2. 将设备连接
-
-- 在Cloud9的终端中输入此命令来下载根证书
+在Cloud9终端中输入如下命令：
 
 ```sh
-  curl https://www.amazontrust.com/repository/AmazonRootCA1.pem > root-CA.crt
+curl https://www.amazontrust.com/repository/AmazonRootCA1.pem > root-CA.crt
 ```
 
-- 上传您的xxx.cert.pem以及xxx.private.pem，此文件位于您刚刚解压的connect_device_package压缩包中。
-<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/3.png">
-</a>
+- 下载模拟设备源代码
 
-![Hello](./md_image/code/3.png)
-
-- 在终端中输入此命令来下载car_publish.py文件，点击打开
+在终端中输入此命令来下载模拟设备的python源代码(car_publish.py)，该python程序模拟一个IoT设备，连接至AWS IoT并往云端不停发送消息
 
 ```sh
-wget https://raw.githubusercontent.com/lanskyfan/iot-cv-demo/master/src/car_publish.py
+wget https://raw.githubusercontent.com/linjungz/iot-cv-demo/master/src/car_publish.py
 ```
 
-- 此时您的所有文件将包括以下这些
-<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/4.png">
-</a>
+- 修改模拟设备代码以更新IoT连接信息
 
-![Hello](./md_image/code/4.png)
-
-- 将car_publish.py中的IoT终端节点、证书、私钥文件名替换为您的节点以及文件名：
+找到代码中如下部分并进行相应替换
 
 ```python
 #Setup MQTT client and security certificates
-mqttc = AWSIoTMQTTClient("MyIoTDevice") 
-mqttc.configureEndpoint("ChangeToYouEnd.iot.cn-north-1.amazonaws.com.cn",8883) # 需要更改（方法见下文）
+mqttc = AWSIoTMQTTClient("MyIoTDevice")   #请将Clientid设置为ThingName
+mqttc.configureEndpoint("ChangeToYouEnd.iot.cn-north-1.amazonaws.com.cn",8883) #更改为对应的Endpoint地址
 
 mqttc.configureCredentials(
-  './root-CA.crt',                # 参考Cloud9中的文件名更改
-  './MyIoTDevice.private.key',    # 参考Cloud9中的文件名更改
-  './MyIoTDevice.cert.pem'        # 参考Cloud9中的文件名更改
+  './root-CA.crt',                # 参考Cloud9中的文件名进行更改
+  './MyIoTDevice.private.key',    # 参考Cloud9中的文件名进行更改
+  './MyIoTDevice.cert.pem'        # 参考Cloud9中的文件名进行更改
 )
 ```
 
-- 如需寻找您的终端节点，请打开IoT服务，进入您的物品，并进入交互部分，请将终端节点记住。
-<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/5.png">
-</a>
+如下是确定IoT Endpoint的方法：
+![](./md_image/page1/28.jpg)
 
-![Hello](./md_image/code/5.png)
 
-- 在终端使用python3运行您的car_publish.py文件,传递的数据将会显示在您的终端上
+- 运行模拟设备程序，并在云端检查是否收到消息
 
-```sh
-python3 car_publish.py
-```
+在Cloud9上运行模拟设备程序,并检查程序输出
+![](./md_image/page1/29.jpg)
 
-<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/code/6.png">
-</a>
+在AWS IoT控制台上查看消息是否已经发送上来：
 
-![Hello](./md_image/code/6.png)
+在IoT控制台提供的MQTT客户端上，可以对MQTT主题进行订阅，从而收到相应主题下的MQTT消息。这里订阅主题输入”#"，即订阅所有主题下的消息：
+![](./md_image/page1/30.jpg)
 
-- 回到IoT主页中，进入测试并点击订阅
-<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page2/1.png">
-</a>
-
-![订阅](./md_image/page2/1.png)
-
-- 在订阅主题栏中输入“connectedcar/telemetry/#”并点击订阅主题，您将看到从您的EC2发送的消息。
-<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page2/2.png">
-</a>
-
-![Hello](./md_image/page2/2.png)
-
-- 消息类似下图
-<a data-fancybox="gallery" href="https://iot-demo-resource.s3-ap-southeast-1.amazonaws.com/page2/3.png">
-</a>
-
-![Hello](./md_image/page2/3.png)
-
+可以看到设备端的消息不断的打到云端上来，从MQTT客户端上可以看到消息的主题和具体的Payload
+![](./md_image/page1/31.jpg)
