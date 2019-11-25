@@ -15,13 +15,11 @@
 #### [Lab 01. 车辆接入IoT并上传数据](docs/01_connect_publish.md)
 在这个实验中我们将演示如何创建一个IoT Thing并将模拟设备接入AWS IoT，通过模拟设备向AWS IoT云端发送传感器数据
 
-#### [Lab 02. 数据在云端展现](docs/02_data_visualize.md)
+#### [Lab 02. 控制指令下发至车端](docs/04_control.md)
+在这个实验中我们将演示如何利用AWS IoT Shadow来进行设备状态的控制
+
+#### [Lab 03. 数据在云端展现](docs/02_data_visualize.md)
 在这个实验中我们将演示如何将AWS IoT云端收集到的传感器数据通过Rule Engine保存至ElasticSearch中，并利用Kibana进行实时展现
 
-#### [Lab 03. 数据在云端归档保存]
-在这个实验中我们将演示如何将AWS IoT云端收集到的传感器数据通过Rule Engine打到Kinesis Firehose并存入S3中，进而实现数据在云端的归档保存
-
-#### [Lab 04. 控制指令下发至车端](docs/04_control.md)
-在这个实验中我们将演示如何利用AWS IoT Shadow来进行设备状态的控制
 
 #### 实验内容持续更新中...
