@@ -1,4 +1,4 @@
-## Lab 01. 接入IoT并上传数据
+## Lab 01. IoT接入与消息发送
 
 本实验描述如何将模拟设备接入AWS IoT. 
 AWS IoT使用证书进行双向认证, 模拟设备接入前需要配置证书及私钥，设备通过证书与私钥即可连接至AWS IoT并进行加密传输。
@@ -111,7 +111,7 @@ wget https://raw.githubusercontent.com/linjungz/iot-cv-demo/master/src/car_publi
 
 ```python
 #Setup MQTT client and security certificates
-mqttc = AWSIoTMQTTClient("MyIoTDevice")   #请将Clientid设置为ThingName
+mqttc = AWSIoTMQTTClient("MyIoTDevice")   #请将Clientid设置为ThingName，在每个AWS Account中需要唯一
 mqttc.configureEndpoint("ChangeToYouEnd.iot.cn-north-1.amazonaws.com.cn",8883) #更改为对应的Endpoint地址
 
 mqttc.configureCredentials(
