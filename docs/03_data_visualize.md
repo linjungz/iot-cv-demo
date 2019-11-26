@@ -7,6 +7,7 @@
 - 进入ElasticSearch服务的控制台并创建一个ES域
 
 ![](./md_image/dashboard/1.jpg)
+
 ![](./md_image/dashboard/2.jpg)
 
 - 选择部署类型为“开发和测试”，Elasticsearch 选择版本为“6.8”，点击下一步。
@@ -16,13 +17,11 @@
 ![](./md_image/dashboard/4.jpg)
 
 - 网络配置选择“公有访问权限”， 为方便测试访问策略选择”允许对域进行公开访问“
-
 ![](./md_image/dashboard/5.jpg)
 
-*注意：仅在测试环境使用该策略，在生产环境建议对权限进行更为严格的设置“
+*注意：仅在测试环境使用该策略，在生产环境建议对权限进行更为严格的设置*
 
 - 检查之前的配置，点击确认，您将在控制面看见您的新域。稍等十分钟之后，ES域状态变有”有效“。
-
 ![](./md_image/dashboard/6.jpg)
 
 
@@ -34,10 +33,46 @@
 
 ![](./md_image/dashboard/7.jpg)
 
+命令如下：
+
+```json
+PUT cars
+{
+  "mappings": {
+    "car": {
+      "properties": {
+        "timestamp": {
+          "type": "long",
+          "copy_to": "datetime"
+        },
+        "datetime": {
+          "type": "date",
+          "store": true
+        },
+        "location": {
+          "type": "geo_point"
+        },
+        "battery":{
+        "type": "float"
+        },
+        "temperature":{
+        "type": "short"
+        },
+        "pressure":{
+        "type": "short"
+        },
+        "rpm":{
+        "type": "short"
+        }
+      }
+    }
+  }
+}
+```
+
 *通过命令 DELETE index_name 可以删除已有的索引*
 
 在ES控制台可以看到相应的索引已经创建出来
-
 ![](./md_image/dashboard/8.jpg)
 
 
@@ -47,19 +82,12 @@
 
 需要为AWS IoT配置相应的IAM角色，以便该服务有权限可以对其他AWS服务进行操作，包括这里使用的ES
 
-- 打开AWS IAM服务，选择侧边栏的角色，点击创建角色
-
+- 打开AWS IAM服务，选择侧边栏的角色，开始创建角色
 ![](./md_image/dashboard/20.png)
-
-- 在AWS产品中选择IoT，点击下一步：权限
 
 ![](./md_image/dashboard/21.png)
 
-- 点击下一步：标签
-
 ![](./md_image/dashboard/22.png)
-
-- 点击下一步：审核
 
 ![](./md_image/dashboard/23.png)
 
@@ -72,11 +100,9 @@
 接下来我们在IoT Rule Engine中创建规则，将数据导入至ES中
 
 - 进入IoT服务，进打开侧边栏的”行动“，点击"创建"
-
 ![](./md_image/dashboard/50.jpg)
 
 - 配置规则的基本信息
-
 ![](./md_image/dashboard/53.jpg)
 
 通过规则查询语句（以SQL语法），我们可以提取指定MQTT主题下的数据，并可进行简单的预处理。相应的SQL语句如下
