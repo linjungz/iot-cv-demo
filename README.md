@@ -18,7 +18,7 @@
 #### [Lab 02. 设备状态控制](docs/02_control.md)
 在这个实验中我们将演示如何利用AWS IoT Shadow来进行设备状态的控制
 
-#### [Lab 03. 数据在云端展现](docs/02_data_visualize.md)
+#### [Lab 03. 数据实时展示](docs/03_data_visualize.md)
 在这个实验中我们将演示如何将AWS IoT云端收集到的传感器数据通过Rule Engine保存至ElasticSearch中，并利用Kibana进行实时展现
 
 #### 实验内容持续更新中...
