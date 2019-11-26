@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# car.py
+# car_job_agent.py
 # -- This is a demo program for AWS IoT Job and OTA
 # -- It simulates a car that's connected to AWS IoT Core and use Job for OTA
 # Author: Randy Lin
@@ -18,20 +18,14 @@ import wget
 
 logging.basicConfig(level = logging.INFO)
 
-#Load configuration from config.ini
-config = configparser.ConfigParser()
-config.read('config.ini')
-
 #Setup MQTT client and security certificates
-jobc = AWSIoTMQTTThingJobsClient('Car1', 'Car1')
-jobc.configureEndpoint(
-  config['Endpoints']['BJS_IOT_ENDPOINT'],
-  int(config['Endpoints']['BJS_IOT_ENDPOINT_PORT'])
-)
+jobc = AWSIoTMQTTThingJobsClient("MyIoTDevice", "MyIoTDevice") 
+jobc.configureEndpoint("aj8l8x9dxn5d9-ats.iot.cn-northwest-1.amazonaws.com.cn",8883)
+
 jobc.configureCredentials(
-  config['Certs']['ROOT_CA'],
-  config['Certs']['CAR_1_PRIVATE_KEY'],
-  config['Certs']['CAR_1_CERT']
+  './root-CA.crt',
+  './MyIoTDevice.private.key',
+  './MyIoTDevice.cert.pem'
 )
 
 #Connect to IoT Core
@@ -81,3 +75,4 @@ jobc.sendJobsStartNext()
 
 while True:
   time.sleep(1)
+
