@@ -1,6 +1,12 @@
 ## Lab 03. 数据实时展现
 
+### 实验概述
+
 在这个实验中我们将演示如何将AWS IoT云端收集到的传感器数据通过Rule Engine保存至ElasticSearch中，并利用Kibana进行实时展现
+
+### 架构图
+
+![](./md_image/diagram-lab03.jpg)
 
 ### 1. 部署ElasticSearch
 
@@ -133,6 +139,9 @@ SELECT *, timestamp() as timestamp FROM 'connectedcar/#'
 
 #### 3.1 创建Index Pattern
 
+- 在Cloud9中运行car_publish.py，可以看到数据已经不断产生
+![](./md_image/dashboard/60.jpg)
+
 - 进入Kibana的discover侧边栏，选择Create index pattern，并在index pattern中输入“cars”。匹配成功后会显示Success，之后请点击Next step
 ![](./md_image/dashboard/40.png)
 
@@ -144,8 +153,7 @@ SELECT *, timestamp() as timestamp FROM 'connectedcar/#'
 
 #### 3.2 打开模拟设备，检查数据是否进入ES
 
-- 在Cloud9中运行car_publish.py，可以看到数据已经不断产生
-![](./md_image/dashboard/60.jpg)
+
 
 - 在Kibana中检查数据是否已经进入ES
 ![](./md_image/dashboard/61.jpg)

@@ -1,13 +1,16 @@
 ## Lab 02. 设备状态控制
 
+### 实验概述
+
 本实验将演示如何通过AWS IoT Shadow对设备进行控制。
 通过两个python程序，本实验将演示一个控制器如何通过AWS IoT将指令发送到设备端。
 模拟设备是一个灯，可以有亮度和颜色两种状态。
 
-### 演示代码
+### 架构图
 
-- light.py  模拟设备（灯）
-- light_controller.py 模拟设备控制器
+![](./md_image/diagram-lab02.jpg)
+- light.py : 模拟设备（灯）
+- light_controller.py : 模拟设备控制器
 
 ### 1. 实验前检查
 
