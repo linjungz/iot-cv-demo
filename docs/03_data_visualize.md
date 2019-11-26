@@ -151,15 +151,11 @@ SELECT *, timestamp() as timestamp FROM 'connectedcar/#'
 - 检查刚刚创建的index pattern: cars。
 ![](./md_image/dashboard/42.png)
 
-#### 3.2 打开模拟设备，检查数据是否进入ES
-
-
-
 - 在Kibana中检查数据是否已经进入ES
 ![](./md_image/dashboard/61.jpg)
 
 
-#### 3.3 进行图表设置
+#### 3.2 进行图表设置
 
 - 在Kibana中进入Visualize侧边栏，选择create a visualization。
 ![](./md_image/dashboard/43.png)
