@@ -90,7 +90,7 @@ AWS IoT云端可进行策略配置，策略是与证书相绑定，通过策略�
  解压刚刚下载的”connect_device_package.zip“文件， 可以看到里面有4个文件
 ![名字](./md_image/page1/10.png)
 
-上传后缀为cert.pem和private.pem这两个文件，分别是刚才创建的Thing的设备证书和私钥
+上传后缀为cert.pem和private.key这两个文件，分别是刚才创建的Thing的设备证书和私钥
 
 ![](./md_image/page1/27.jpg)
 
